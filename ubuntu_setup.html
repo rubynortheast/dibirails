@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="DIBI Rails : DIBI 2012 Workshop: Ubuntu Setup" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>DIBI Rails</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/rubynortheast/dibirails">See Me on GitHub</a>
+
+          <h1 id="project_title">Introduction to Ruby on Rails</h1>
+          <h2 id="project_tagline">DIBI 2012 Workshop</h2>
+
+          <section id="downloads">
+            <a class="zip_download_link" href="https://github.com/rubynortheast/dibirails/zipball/master">Download this project as a .zip file</a>
+            <a class="tar_download_link" href="https://github.com/rubynortheast/dibirails/tarball/master">Download this project as a tar.gz file</a>
+          </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h3>Ubuntu Setup.</h3>
+<p>This is a briefly annotated account of how we set up a Ruby &amp; Rails Environment on a fresh install of Ubuntu 10.04 LTS (Lucid Lynx).</p>
+<pre><code>
+$ sudo apt-get update # retrieve the latest packages
+$ sudo apt-get upgrade # update the current packages
+$ restart # allow configuration of newly updated packages
+$ sudo apt-get install curl # allow us to install rvm
+$ curl -L get.rvm.io | bash -s stable # install rvm
+$ sudo apt-get install build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion # install rvm dependencies
+$ rvm install 1.9.3
+
+# You should't have to do this bit
+# but RVM was not a function so:
+$ echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function' >> ~/.bash_profile
+$ source ~/.bash_profile # apply changes to current shell
+$ rvm --default use 1.9.3 # set 1.9.3 as default Ruby
+
+$ sudo apt-get install vim # The Editor
+$ gem install rails # The Framework
+$ rails new demo # create new Rails application
+$ cd demo # go to it
+$ bundle install # install application dependencies
+</code></pre>
+
+<h3>Authors and Contributors</h3>
+<p>Created and curated by @pootsbook and @xocs from @Audacious</p>
+
+<h3>Support or Contact</h3>
+<p>Having trouble with anything? Open an GitHub Issue on <a href="https://github.com/rubynortheast/dibirails/issues">this repository</a> and we’ll help you sort it out.</p>
+
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">DIBI Rails maintained by <a href="https://github.com/rubynortheast">rubynortheast</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+  </body>
+</html>
