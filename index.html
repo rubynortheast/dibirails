@@ -37,36 +37,25 @@
 
 <h3>0. Setup a Rails Development Environment</h3>
 
-<p>Setting up your environment can be difficult when starting with Ruby on Rails. There‘s a lot to take on board before you even get started. To make things easy for you, and to ensure that you have everything you need to follow along with the workshop, we have created a Virtual Machine image with the correct setup using popular, open-source tools. You’ll need to download VirtualBox, Vagrant and a Vagrant Box that we have created. Don’t worry, this is quite straight forward and is designed to work on all major platforms: Windows, Mac OS, and Linux.</p>
+<p>Setting up your environment can be difficult when beginning Ruby on Rails. There‘s a lot to take on board before you even get started. To make things easy for you, and to ensure that you have everything you need to follow along with the workshop, we have created a Virtual Machine image with the correct setup using popular, open-source tools. You’ll need to download VirtualBox and Vagrant so that you can use our Vagrant Box at the workshop.</p>
 
 <ul>
   <li><a href="https://www.virtualbox.org/wiki/Downloads">Download VirtualBox 4.1.12</a> for your platform and install it.</li>
   <li><a href="http://downloads.vagrantup.com/tags/v1.0.2">Download Vagrant 1.0.2</a> for your platform and install it.<br>More detailed instructions are available in the <a href="http://vagrantup.com/docs/getting-started/index.html">Vagrant Documentation</a></li>
 </ul>
 
-<p>You should now be ready to set up your box. To do so, run the following commands in Terminal or your command prompt. It’s a good idea to create a new directory/folder to work from.</p>
-
-<p><strong>Beginners Tip:</strong> <em>Type each line at your prompt (without the $) and hit the Return Key.</em></p>
-<pre><code>$ vagrant box add dibirails /path/to/box
-$ vagrant init dibirails
-$ vagrant up
-</code></pre>
-<p>This should fire up a virtual machine in the background running our Rails development environment in Ubuntu. You can test that everything is working properly by logging into the machine:</p>
-<pre><code>$ vagrant ssh
-$ cd sample_app
-$ rails s
-</code></pre>
-<p>Visit http://localhost:3000/ in your browser and you should see the welcome page for Michael Hartl’s popular <a href="http://railstutorial.org/">Rails Tutorial</a>. If there are any problems then open a GitHub Issue on the <a href="https://github.com/rubynortheast/dibirails/issues">dibirails repository</a> and we’ll try and work through it with you.</p>
+<h4>Doing It Yourself</h4>
+<p>If you’re a little more experienced and want to set up a Rails development environment natively, then we can recommend the JumpstartLab <a href="http://tutorials.jumpstartlab.com/topics/environment/environment.html">Environment Setup</a> (all platforms) or the Thoughtbot <a href="https://github.com/thoughtbot/laptop">Laptop Script</a> (Mac OSX only). We’re using Ruby 1.9.3 and Rails 3.1.1 on the day, but anything from Ruby 1.9.2 and Rails 3.1 upwards will be fine. Have a look at how we <a href="">setup Ubuntu</a> for the workshop.
 
 <h4>Text Editor</h4>
 <p>The Rails community eschew IDEs in favour of text-editors. The most popular editors are <a href="http://www.vim.org/">Vim</a> and <a href="http://macromates.com/">Textmate</a>. For this course we recommend <a href="http://www.sublimetext.com/2">Sublime Text 2</a> because it works the same across Mac, Windows, and Linux, and has an unlimited trial.</a>
-<h3>Authors and Contributors</h3>
 
+<h3>Authors and Contributors</h3>
 <p>Created and curated by @pootsbook and @xocs from @Audacious</p>
 
 <h3>Support or Contact</h3>
-
 <p>Having trouble with anything? Open an GitHub Issue on <a href="https://github.com/rubynortheast/dibirails/issues">this repository</a> and we’ll help you sort it out.</p>
+
       </section>
     </div>
 
@@ -77,8 +66,5 @@ $ rails s
         <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-
-    
-
   </body>
 </html>
