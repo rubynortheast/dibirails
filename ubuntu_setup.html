@@ -33,26 +33,77 @@
       <section id="main_content" class="inner">
         <h3>Ubuntu Setup.</h3>
 <p>This is a briefly annotated account of how we set up a Ruby &amp; Rails Environment on a fresh install of Ubuntu 10.04 LTS (Lucid Lynx).</p>
-<pre><code>
-$ sudo apt-get update # retrieve the latest packages
-$ sudo apt-get upgrade # update the current packages
-$ restart # allow configuration of newly updated packages
-$ sudo apt-get install curl # allow us to install rvm
-$ curl -L get.rvm.io | bash -s stable # install rvm
-$ sudo apt-get install build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion # install rvm dependencies
+<pre><code># retrieve the latest packages
+$ sudo apt-get update
+
+# update the current packages
+$ sudo apt-get upgrade
+
+# allow configuration of newly updated packages
+$ restart
+
+# allow us to install RVM via curl
+$ sudo apt-get install curl
+
+# install rvm
+$ curl -L get.rvm.io | bash -s stable
+
+# install rvm dependencies
+$ sudo apt-get install build-essential \
+                       openssl \
+                       libreadline6 \
+                       libreadline6-dev \
+                       curl \
+                       git-core \
+                       zlib1g \
+                       zlib1g-dev \
+                       libssl-dev \
+                       libyaml-dev \
+                       libsqlite3-dev \
+                       sqlite3 \
+                       libxml2-dev \
+                       libxslt-dev \
+                       autoconf \
+                       libc6-dev \
+                       ncurses-dev \
+                       automake \
+                       libtool \
+                       bison \
+                       subversion
+
+# Install Ruby 1.9.3
 $ rvm install 1.9.3
 
-# You should't have to do this bit
-# but RVM was not a function so:
+-----
+# You should't have to do this bit but RVM was not a function so:
 $ echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function' >> ~/.bash_profile
-$ source ~/.bash_profile # apply changes to current shell
-$ rvm --default use 1.9.3 # set 1.9.3 as default Ruby
 
-$ sudo apt-get install vim # The Editor
-$ gem install rails # The Framework
-$ rails new demo # create new Rails application
-$ cd demo # go to it
-$ bundle install # install application dependencies
+# apply changes to current shell
+$ source ~/.bash_profile
+-----
+
+# set 1.9.3 as default system Ruby
+$ rvm --default use 1.9.3
+
+# Install The Editor
+$ sudo apt-get install vim 
+
+# Install The Framework
+$ gem install rails
+
+# create new Rails application
+$ rails new demo
+
+# go to it
+$ cd demo
+
+# install application dependencies
+$ bundle install
+
+# boot up the server
+# rails s
+
+# visit http://localhost:3000/
 </code></pre>
 
 <h3>Authors and Contributors</h3>
