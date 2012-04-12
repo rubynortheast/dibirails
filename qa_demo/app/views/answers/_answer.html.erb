@@ -1,0 +1,6 @@
+<div class="answers-block">
+  <%= simple_format(answer.body) %>
+  <p>
+    <small><%= answer.user_name %> - <%= time_ago_in_words(answer.created_at) %></small>
+  </p>
+</div>

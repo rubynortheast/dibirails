@@ -1,0 +1,127 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree . 
+*/
+
+/* -- RESET -------------------------------------------------- */
+
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{background-color:#ff9;color:#000;text-decoration:none}mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}input,select{vertical-align:middle}
+
+/* -- END RESET --------------------------------------------- */
+
+body{
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size:16px;
+	}
+
+small{
+	font-size:smaller;
+	}
+
+h1{
+	font-size:50px;
+	margin-bottom:20px;
+	color:#375265;
+	}
+
+h2{
+	font-size:35px;
+	margin-bottom:20px;
+	color:#375265;
+	}
+
+h3{
+	font-size:18px;
+	}
+
+p{
+	margin:10px 0;
+	}
+
+a{
+	text-decoration:none;
+	color:#FF6600;
+	}
+
+a:hover{
+	text-decoration:none;
+	color:#375265;
+	}
+
+.container{
+	width:800px;
+	margin:10px auto;
+	}
+
+.button{
+  cursor: pointer;
+  display:block;
+  padding:10px;
+  margin:20px 0;
+  text-align:center;
+  line-height:1;
+	box-shadow : 1px, 1px, 2px, 0px, rgba(0, 0, 0, 0.2);
+	color: #333;
+	border: 1px solid #666;
+	font-size:18px;
+	background:#F9F9F9;
+	}
+
+.button:hover{
+  text-decoration: none;
+  opacity: 0.8;
+  }
+  
+.question-container{
+	margin:10px 0;
+	padding:10px 0;
+	border-bottom: 1px solid #CCC;
+	}
+
+.answers-container{
+	margin:10px 0;
+	padding:10px 0;
+	border-top: 1px solid #CCC;
+	}
+
+.question-container .question-block{
+	margin:10px 0;
+	border-left:8px solid #0099FF;
+	padding-left:10px;
+	display:block;
+	}
+
+.answers-container .answers-block{
+	margin:10px 0;
+	border-left:8px solid #FF6600;
+	padding-left:10px;
+	}
+
+/* -- FORMS -----------------------------------------------------------------*/
+
+input[type="text"]{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left:10px;
+  border: solid 1px #ccc;
+  margin-bottom: 5px;
+  outline:0;
+  color:#666;
+	}
+
+textarea{
+  height:100px;
+  width:95%;
+  border: solid 1px #ccc;
+  padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left:10px;
+  }
+
+/* -- END FORMS -------------------------------------------------------------*/
+
+
+

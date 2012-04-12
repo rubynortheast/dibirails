@@ -1,0 +1,20 @@
+<div class="question-container">
+  <h1><%= @question.title %></h1>
+  <div class="question-block">
+    <%= simple_format(@question.body) %>
+    <p>
+      <small><%= @question.user_name %> - <%= time_ago_in_words(@question.created_at) %></small>
+    </p>
+  </div>
+</div>
+
+<h3>Add your response...</h3>
+<%= render :partial => "answers/form", :locals => { :question => @question} %>
+
+<div class="answers-container">
+  <h2>Answers</h2>
+  <%= render :partial => 'answers/answer', :collection => @question.answers %>
+</div>
+
+<%= link_to "Back", :back, :class => "button" %>
+
