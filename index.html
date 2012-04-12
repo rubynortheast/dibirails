@@ -51,6 +51,12 @@
 $ vagrant init dibirails
 $ vagrant up
 </code></pre>
+<p>This should fire up a virtual machine in the background running our Rails development environment in Ubuntu. You can test that everything is working properly by logging into the machine:</p>
+<pre><code>$ vagrant ssh
+$ cd sample_app
+$ rails s
+</code></pre>
+<p>Visit http://localhost:3000/ in your browser and you should see the welcome page for Michael Hartl’s popular <a href="http://railstutorial.org/">Rails Tutorial</a>. If there are any problems then open a GitHub Issue on the <a href="https://github.com/rubynortheast/dibirails/issues">dibirails repository</a> and we’ll try and work through it with you.</p>
 
 <h3>Authors and Contributors</h3>
 
