@@ -1,3 +1,13 @@
 <h1>New Question</h1>
-<%= render :partial => "form" %>
-<%= link_to "Back", :back, :class => "button" %>
+<%= form_for @question do |f| %>
+  <%- @question.errors.full_messages.each do |msg| %>
+     <li><%= msg %></li>
+  <% end %>
+  <ul>
+    <li><%= f.text_field :title, {:placeholder => 'Please add a title...'} %></li>
+    <li><%= f.text_area :body, {:placeholder => 'Please add your question...'} %></li>
+    <li><%= f.text_field :user_name, {:placeholder => 'Please add your name...'} %><li>
+    <li><%= f.submit %></li>
+  </ul>
+<% end %>
+<%= link_to "Back", questions_path, :class => "button" %>

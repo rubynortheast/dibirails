@@ -1,13 +1,10 @@
-<%= form_for(:answer, :url => question_answers_path(question)) do |f| %>
-  <%- @answer.errors.full_messages.each do |msg| %>
-     <p><%= msg %></p>
-  <% end %>
+<p class="flash"><%= flash[:notice] %></p>
 
-  <p>  
-    <%= f.text_area :body, {:placeholder => 'Please add your response...'} %>
-  </p>
-  <p>
-    <%= f.text_field :user_name, {:placeholder => 'Please add your name...'} %>
-  <p>
-  <%= f.submit %>
+<%= form_for(:answer, :url => question_answers_path(question)) do |f| %>
+  <ul>
+    <li><%= f.text_area :body, {:placeholder => 'Please add your response...'} %></li>
+    <li><%= f.text_field :user_name, {:placeholder => 'Please add your name...'} %></li>
+    <li><%= f.submit "Respond"%></li>
+  </ul>
 <% end %>
+

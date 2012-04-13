@@ -9,6 +9,7 @@
 </div>
 
 <h3>Add your response...</h3>
+
 <%= render :partial => "answers/form", :locals => { :question => @question} %>
 
 <div class="answers-container">
@@ -16,5 +17,5 @@
   <%= render :partial => 'answers/answer', :collection => @question.answers %>
 </div>
 
-<%= link_to "Back", :back, :class => "button" %>
+<%= link_to "Back", questions_path, :class => "button" %>
 
