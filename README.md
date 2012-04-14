@@ -1,35 +1,34 @@
-# RUBY ON RAILS - QA APPLICATION - DIBI 2012
+# RUBY ON RAILS - Q&A APPLICATION - DIBI 2012
 
 ## INITIAL SETUP 
 
-* Open Terminal or Command 
-line(cmd)
+* At the command line (Terminal, Windows cmd)
 * Create a new skeleton application:
  
 ```ruby
 rails new qa_demo
 ```
 
-* Change Current Directory to the rails application: 
+* Change your current directory to the Rails application: 
 
-```ruby
+```shell
 cd qa_demo
 ```
 
 
 * Start the server: 
 
-```ruby
+```shell
 rails server
 ```
 
-* open up your browser of choise and goto; http://localhost:3000. 
+* open up your browser of choice and browse to: http://localhost:3000. 
 
 ## QUESTION MODELS AND MIGRATION
 
-Open Terminal or Command line(cmd) and Run the generator to create a model: 
+Open Terminal or Command (cmd) and Run the generator to create a model: 
 
-```ruby
+```shell
 rails generate model Question 
 ```
 
@@ -40,7 +39,7 @@ This creates the following;
 * /test/unit/question_test.rb : A file for unit tests for Question
 * /test/fixtures/question.yml : A fixtures file to assist with unit testing 
 
-Firstly we will create the questions Migration, go to db/migrate/(time_stamp)_create_questions.rb and populate the migration with the code block below.
+Firstly we will create the questions Migration, go to db/migrate/<time_stamp>_create_questions.rb and populate the migration with the code block below.
 
 ```ruby
        def change
@@ -54,14 +53,14 @@ Firstly we will create the questions Migration, go to db/migrate/(time_stamp)_cr
 ```
 
 
-Save that migration file, goto terminal / command line(cmd), and run the following command: 
+Save that migration file, go to the command line, and run the following command: 
 
-```ruby
+```shell
 rake db:migrate
 ```
 
 
-If all is well this will have create the Questions table, we can now test this using rails console, while in cmd enter:
+If all is well this will have created the questions table. We can now test this using rails console:
 
 ```ruby
 rails console
