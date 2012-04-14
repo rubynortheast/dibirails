@@ -19,7 +19,7 @@ $ cd qa_demo
 * Start the server: 
 
 ```shell
-rails server
+$ rails server
 ```
 
 * open up your browser of choice and browse to: http://localhost:3000.
@@ -42,14 +42,14 @@ This creates the following files:
 Let’s have a look at the questions Migration, go to `db/migrate/<time_stamp>_create_questions.rb` and you’ll notice what the generator has done for us:
 
 ```ruby
-       def change
-         create_table :questions do |t|
-           t.string :title
-           t.text :body
-           t.string :user_name
-           t.timestamps
-         end
-       end
+def change
+  create_table :questions do |t|
+    t.string :title
+    t.text :body
+    t.string :user_name
+    t.timestamps
+  end
+end
 ```
 
 Save that migration file and run the following command:
@@ -59,7 +59,7 @@ $ rake db:migrate
 ```
 
 
-If all is well this will have created the questions table. We can now test this using rails console:
+If all is well this will have created the `questions` table. We can now test this using rails console:
 
 ```shell
 $ rails console
@@ -78,16 +78,17 @@ Try out the following
 
 shout up if you have any errors or questions.
 
-We now we will take a look at the model open up /app/models/question.rb. We will be re-visiting the Question modal soon but for now we will put in some basic Validations : 
+We now we will take a look at the model open up `/app/models/question.rb`. We will be re-visiting the `Question` model soon but for now we will put in some basic validations: 
 
 ```ruby
-validates_presence_of :title, :body, :user_name
+class Question
+  validates_presence_of :title, :body, :user_name
+end
 ```
 
+Why dont you take a look at [Rails Validations](http://guides.rubyonrails.org/active_record_validations_callbacks.html) to see the other options available. 
 
-Why dont you take a look at rails validations [link] to see the other options availible. 
-
-Now we know we have a working database it time to set up the web interface.
+Now we know we have a working database it’s time to set up the web interface.
 
 ## Controllers and Routes
 
