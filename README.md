@@ -5,14 +5,14 @@
 * At the command line (Terminal, Windows cmd)
 * Create a new skeleton application:
  
-```ruby
-rails new qa_demo
+```shell
+$ rails new qa_demo
 ```
 
 * Change your current directory to the Rails application: 
 
 ```shell
-cd qa_demo
+$ cd qa_demo
 ```
 
 
@@ -22,24 +22,24 @@ cd qa_demo
 rails server
 ```
 
-* open up your browser of choice and browse to: http://localhost:3000. 
+* open up your browser of choice and browse to: http://localhost:3000.
 
-## QUESTION MODELS AND MIGRATION
+## QUESTION MODEL AND MIGRATION
 
-Open Terminal or Command (cmd) and Run the generator to create a model: 
+Run the generator to create a model:
 
 ```shell
-rails generate model Question 
+$ rails generate model Question title:string body:text user_name:string
 ```
 
-This creates the following;
+This creates the following files:
 
-* /db/migrate/(time_stamp)_create_questions.rb : Database migration to create the questions table
-* /app/models/question.rb : The file for the model code
-* /test/unit/question_test.rb : A file for unit tests for Question
-* /test/fixtures/question.yml : A fixtures file to assist with unit testing 
+* `/db/migrate/(time_stamp)_create_questions.rb` Database migration to create the `questions` table
+* `/app/models/question.rb` : The `Question` model
+* `/test/unit/question_test.rb` A file for unit testing `Question` in this file
+* `/test/fixtures/question.yml` A fixtures file to assist with unit testing
 
-Firstly we will create the questions Migration, go to db/migrate/<time_stamp>_create_questions.rb and populate the migration with the code block below.
+Let’s have a look at the questions Migration, go to `db/migrate/<time_stamp>_create_questions.rb` and you’ll notice what the generator has done for us:
 
 ```ruby
        def change
@@ -52,30 +52,28 @@ Firstly we will create the questions Migration, go to db/migrate/<time_stamp>_cr
        end
 ```
 
-
-Save that migration file, go to the command line, and run the following command: 
+Save that migration file and run the following command:
 
 ```shell
-rake db:migrate
+$ rake db:migrate
 ```
 
 
 If all is well this will have created the questions table. We can now test this using rails console:
 
-```ruby
-rails console
+```shell
+$ rails console
 ```
-
 
 Try out the following 
 
 ```ruby
-Time.now - Give you the current time
-q = Question.new
-q.title = "Sample Question Title"
-q.body = "This is the body text for the Question."
-q.save
-Question.all
+>> Time.now  # Gives you the current time
+>> q = Question.new
+>> q.title = "Why is Rails so good?"
+>> q.body = "Has it got anything to do with Ruby?"
+>> q.save
+>> Question.all
 ```
 
 shout up if you have any errors or questions.
