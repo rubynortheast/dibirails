@@ -1,150 +1,145 @@
-# RUBY ON RAILS - QA APPLICATION - DIBI 2012
+# RUBY ON RAILS - Q&A APPLICATION - DIBI 2012
 
 ## INITIAL SETUP 
 
-* Open Terminal or Command 
-line(cmd)
+* At the command line (Terminal, Windows cmd)
 * Create a new skeleton application:
  
-```ruby
-rails new qa_demo
+```shell
+$ rails new qa_demo
 ```
 
-* Change Current Directory to the rails application: 
+* Change your current directory to the Rails application: 
 
-```ruby
-cd qa_demo
+```shell
+$ cd qa_demo
 ```
-
 
 * Start the server: 
 
-```ruby
-rails server
+```shell
+$ rails server
 ```
 
-* open up your browser of choise and goto; http://localhost:3000. 
+* open up your browser of choice and browse to: http://localhost:3000.
 
-## QUESTION MODELS AND MIGRATION
+## QUESTION MODEL AND MIGRATION
 
-Open Terminal or Command line(cmd) and Run the generator to create a model: 
+Run the generator to create a model:
 
-```ruby
-rails generate model Question 
+```shell
+$ rails generate model Question title:string body:text user_name:string
 ```
 
-This creates the following;
+This creates the following files:
 
-* /db/migrate/(time_stamp)_create_questions.rb : Database migration to create the questions table
-* /app/models/question.rb : The file for the model code
-* /test/unit/question_test.rb : A file for unit tests for Question
-* /test/fixtures/question.yml : A fixtures file to assist with unit testing 
+* `/db/migrate/(time_stamp)_create_questions.rb` Database migration to create the `questions` table
+* `/app/models/question.rb` : The `Question` model
+* `/test/unit/question_test.rb` A file for unit testing `Question` in this file
+* `/test/fixtures/question.yml` A fixtures file to assist with unit testing
 
-Firstly we will create the questions Migration, go to db/migrate/(time_stamp)_create_questions.rb and populate the migration with the code block below.
-
-```ruby
-       def change
-         create_table :questions do |t|
-           t.string :title
-           t.text :body
-           t.string :user_name
-           t.timestamps
-         end
-       end
-```
-
-
-Save that migration file, goto terminal / command line(cmd), and run the following command: 
+Let’s have a look at the questions Migration, go to `db/migrate/<time_stamp>_create_questions.rb` and you’ll notice what the generator has done for us:
 
 ```ruby
-rake db:migrate
+def change
+  create_table :questions do |t|
+    t.string :title
+    t.text :body
+    t.string :user_name
+    t.timestamps
+  end
+end
 ```
 
+Save that migration file and run the following command:
 
-If all is well this will have create the Questions table, we can now test this using rails console, while in cmd enter:
-
-```ruby
-rails console
+```shell
+$ rake db:migrate
 ```
 
+If all is well this will have created the `questions` table. We can now test this using rails console:
+
+```shell
+$ rails console
+```
 
 Try out the following 
 
 ```ruby
-Time.now - Give you the current time
-q = Question.new
-q.title = "Sample Question Title"
-q.body = "This is the body text for the Question."
-q.save
-Question.all
+>> Time.now  # Gives you the current time
+>> q = Question.new
+>> q.title = "Why is Rails so good?"
+>> q.body = "Has it got anything to do with Ruby?"
+>> q.save
+>> Question.all
 ```
 
 shout up if you have any errors or questions.
 
-We now we will take a look at the model open up /app/models/question.rb. We will be re-visiting the Question modal soon but for now we will put in some basic Validations : 
+We now we will take a look at the model open up `/app/models/question.rb`. We will be re-visiting the `Question` model soon but for now we will put in some basic validations: 
 
 ```ruby
-validates_presence_of :title, :body, :user_name
+class Question
+  validates_presence_of :title, :body, :user_name
+end
 ```
 
+Why dont you take a look at [Rails Validations](http://guides.rubyonrails.org/active_record_validations_callbacks.html) to see the other options available. 
 
-Why dont you take a look at rails validations [link] to see the other options availible. 
-
-Now we know we have a working database it time to set up the web interface.
+Now we know we have a working database it’s time to set up the web interface.
 
 ## Controllers and Routes
 
-Setting up the routing for questions, we will start by creating a restful resource for questions, go to config/routes.rb.
-Add in:
+We need to link up some routes to a controller, so we will start by creating a RESTful resource for questions, go to `config/routes.rb` and add this line:
 
 ```ruby
 resources :questions
 ```
 then run:
 
-```ruby
-rake routes
-```
- in cmd and review the routing table. you should see the following;
-
-           questions GET    /questions(.:format)                               {:action=>"index", :controller=>"questions"}
-                     POST   /questions(.:format)                               {:action=>"create", :controller=>"questions"}
-        new_question GET    /questions/new(.:format)                           {:action=>"new", :controller=>"questions"}
-       edit_question GET    /questions/:id/edit(.:format) {:action=>"edit", :controller=>"questions"}
-            question GET    /questions/:id(.:format)                           {:action=>"show", :controller=>"questions"}
-                     PUT    /questions/:id(.:format)                           {:action=>"update", :controller=>"questions"}
-                     DELETE /questions/:id(.:format)                           {:action=>"destroy", :controller=>"questions"}
-
-
-while in cmd lets now run the following generator to create the question controller: 
-
-```ruby
-rails generate controller questions
+```shell
+$ rake routes
 ```
 
+and review the routing table. you should see the following;
+
+```shell
+    questions GET    /questions(.:format)          {:action=>"index", :controller=>"questions"}
+              POST   /questions(.:format)          {:action=>"create", :controller=>"questions"}
+ new_question GET    /questions/new(.:format)      {:action=>"new", :controller=>"questions"}
+edit_question GET    /questions/:id/edit(.:format) {:action=>"edit", :controller=>"questions"}
+     question GET    /questions/:id(.:format)      {:action=>"show", :controller=>"questions"}
+              PUT    /questions/:id(.:format)      {:action=>"update", :controller=>"questions"}
+              DELETE /questions/:id(.:format)      {:action=>"destroy", :controller=>"questions"}
+```
+
+now run the following generator to create the questions controller: 
+
+```shell
+$ rails generate controller questions
+```
 
 This creates the following.
 
-* app/controllers/articles_controller.rb : The controller file
-* app/views/articles : The directory to contain The view templates
-* test/functional/articles_controller_test.rb : Unit tests file
-* app/helpers/articles_helper.rb : A helper file to assit views
-* test/unit/helpers/articles_helper_test.rb : Unit test helper
-* app/assets/javascripts/articles.js.coffee : A CoffeeScript file 
-* app/assets/stylesheets/articles.css.scss : An SCSS stylesheet 
-
+* `app/controllers/articles_controller.rb` The controller file.
+* `app/views/articles` The directory to contain the view templates.
+* `test/functional/articles_controller_test.rb` Funcitonal tests file.
+* `app/helpers/articles_helper.rb` A helper file to assist views.
+* `test/unit/helpers/articles_helper_test.rb` Helper test file.
+* `app/assets/javascripts/articles.js.coffee` A CoffeeScript file
+* `app/assets/stylesheets/articles.css.scss` An SCSS stylesheet
 
 now its time to work in the controller, we will create the CRUD methods in the controller as below.
 
 ```ruby
- class QuestionsController < ApplicationController
+class QuestionsController < ApplicationController
   respond_to :html
-  
+
   def index
     @questions = Question.all
     respond_with(@questions)
-  end 
-  
+  end
+
   def show
     @question = Question.find(params[:id])
     @answer = Answer.new
@@ -160,20 +155,19 @@ now its time to work in the controller, we will create the CRUD methods in the c
     @question = Question.create(params[:question])
     respond_with(@question)
   end 
-  
 end
 ```
 
 We will review the above code together once everyone has it in place.
 
-Once we are all happy we can move onto the views. 
+Once we are all happy we can move onto the views.
 
-# Layouts, Views, Partials And assets pipeline
+# Layouts, Views, Partials (& The Asset Pipeline)
 
-## layouts
-goto layouts/application, here you will find the application template that is used across all other view unless specified.. 
+## Layouts
+Go to `app/views/layouts/application.html.erb`, here you will find the default application layout.
 
-you may notice the rails asset_tags and helpers eg 
+You may notice the Rails asset_tags and helpers e.g.,
 
 ```erb
 <%= stylesheet_link_tag    "application" %>
@@ -181,22 +175,20 @@ you may notice the rails asset_tags and helpers eg
 <%= yield %>
 ```
 
+Open up [link] and we will now expand on these a little.
 
-Open up [link] and we will now expand on these a little. 
-
-This is not a frontend workshop but to make it a little easier on the eye we will provide a basic stylesheet but for now all we need to add to this is a contianer div as below
+This is not a frontend workshop but to make it a little easier on the eye we will provide a basic stylesheet. For now the only change we need to make to the file is to add a `div` with a CSS `class` of `container`.
 ```erb
- <div class= "container">
+ <div class="container">
     <%= yield %>
   </div>
 ```
-
 
 we can now move onto the views for the controller CRUD code we wrote earlier, 
 
 ## Views 
  
-goto views/questions add a new file called index.html.erb open the file and enter the following,
+Go to app/views/questions/ add a new file called `index.html.erb`, open the file and enter the following:
 
 ```erb
 <h1>Questions</h1>
@@ -206,16 +198,16 @@ goto views/questions add a new file called index.html.erb open the file and ente
 
 a little strange right ? do a search to find a little more information about the link_to rails helper [link]
 
-now goto http://localhost:3000/questions
+now visit http://localhost:3000/questions
 
-### OH BUM
+### Partials
 
-Whats is whining about ?……
+Oh bum! What is the application whining about?
 
-We need to add a question partial, Partials are a way of packaging reusable view template code. Create new file called _question.html.erb and add in the following;
+We need to add a question partial; Partials are a way of packaging reusable view template code. Create new file in `app/views/questions/` called `_question.html.erb` and add in the following code:
 
 ```erb
-<div class= "question-container">
+<div class="question-container">
   <h2><%= link_to question.title, question_path(question) %></h2>
   <div class="question-block">
     <%= simple_format(question.body) %>
@@ -226,13 +218,13 @@ We need to add a question partial, Partials are a way of packaging reusable view
 </div>
 ```
 
-Above we utilised some awesome rails view helper method check out to see what else is avilible [http://api.rubyonrails.org/classes/ActionView/Helpers/TextHelper.html] you will notice simple_format as a option, and then http://api.rubyonrails.org/classes/ActionView/Helpers/DateHelper.html where you will spot time_ago_in_words and other options availible. Give some of the other methods a try.  
+Above we used some awesome Rails View Helper methods. Check out the documentation to get more information and to see what else is available [http://api.rubyonrails.org/classes/ActionView/Helpers/TextHelper.html] you will notice `simple_format` as an option, and then [http://api.rubyonrails.org/classes/ActionView/Helpers/DateHelper.html] where you will spot `time_ago_in_words` and other options available. Give some of the other methods a try.  
 
-Now Re-visit http://localhost:3000/questions and Click on the "Add new question" link, 
+Now re-visit http://localhost:3000/questions and click on the "Add new question" link, 
 
-### ERROR  
+### Exceptions and Error Messages
 
-Oops, We now need to add the view for the New question page, Create a new file called new.html.erb and enter the code below;
+Oops, We now need to add the view for the New question page, Create a new file called new.html.erb and enter the code below:
 
 ```erb
 <h1>New Question</h1>
@@ -247,10 +239,9 @@ Oops, We now need to add the view for the New question page, Create a new file c
 <%= link_to "Back", questions_path, :class => "button" %>
 ```
 
-take a little look at [http://api.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html] to find out more about the rails form helpers.
+take a little look at [http://api.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html] to find out more about the Rails Form Helpers.
 
-Refresh the page and click submit on the form, nothing happens, 
-this is because we put validation in the model, add the following code and resubmit a empty form.
+Refresh the page and click submit on the form, nothing happens; this is because we put validation in the model, add the following code and resubmit a empty form.
 
 ```ruby
  <%- @question.errors.full_messages.each do |msg| %>
@@ -258,7 +249,7 @@ this is because we put validation in the model, add the following code and resub
   <% end %>
 ```
 
-you should now see the errors, Now try filling in the form and submitting.
+you should now see the error messages, Now try filling in the form and submitting.
 
 ### what ?! another error.
 
@@ -280,7 +271,7 @@ Now saying we need to create the show view for the questions do this by creating
 
 Refresh and we should now be able to create questions although they are looking a little shoddy. 
 
-go to assets/stylesheets/application.css and enter the following; 
+go to `app/assets/stylesheets/application.css` and enter the following; 
 
 ```css
 
