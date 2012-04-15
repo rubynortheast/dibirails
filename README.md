@@ -121,13 +121,13 @@ $ rails generate controller questions
 
 This creates the following.
 
-* `app/controllers/articles_controller.rb` The controller file.
-* `app/views/articles` The directory to contain the view templates.
-* `test/functional/articles_controller_test.rb` Funcitonal tests file.
-* `app/helpers/articles_helper.rb` A helper file to assist views.
-* `test/unit/helpers/articles_helper_test.rb` Helper test file.
-* `app/assets/javascripts/articles.js.coffee` A CoffeeScript file
-* `app/assets/stylesheets/articles.css.scss` An SCSS stylesheet
+* `app/controllers/questions_controller.rb` The controller file.
+* `app/views/questions` The directory to contain the view templates.
+* `test/functional/questions_controller_test.rb` Funcitonal tests file.
+* `app/helpers/questions_helper.rb` A helper file to assist views.
+* `test/unit/helpers/questions_helper_test.rb` Helper test file.
+* `app/assets/javascripts/questions.js.coffee` A CoffeeScript file
+* `app/assets/stylesheets/questions.css.scss` An SCSS stylesheet
 
 now its time to work in the controller, we will create the CRUD methods in the controller as below.
 
