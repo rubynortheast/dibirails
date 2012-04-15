@@ -155,6 +155,26 @@ class QuestionsController < ApplicationController
     @question = Question.create(params[:question])
     respond_with(@question)
   end 
+  
+  def edit  
+    @question = Question.find(params[:id])  
+    respond_with(@question)  
+  end  
+  
+  def update  
+    @question = Question.find(params[:id])  
+    if @question.update_attributes(params[:question])  
+      flash[:notice] = "Successfully updated question."  
+    end  
+    respond_with(@question)  
+  end  
+    
+  def destroy  
+    @question = Question.find(params[:id])  
+    @question.destroy  
+    flash[:notice] = "Successfully destroyed product."  
+    respond_with(@question)  
+  end
 end
 ```
 
@@ -241,12 +261,29 @@ Oops, We now need to add the view for the New question page, Create a new file c
 
 take a little look at [http://api.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html] to find out more about the Rails Form Helpers.
 
-Refresh the page and click submit on the form, nothing happens; this is because we put validation in the model, add the following code and resubmit a empty form.
+Refresh the page and click submit on the form, nothing happens; this is because we put validation in the model, add the following code to the new.html.erb within the form and re-submit.
 
 ```ruby
  <%- @question.errors.full_messages.each do |msg| %>
      <li><%= msg %></li>
   <% end %>
+```
+ new.html.erb should now look something like this;
+ 
+```erb
+<h1>New Question</h1>
+<%= form_for @question do |f| %>
+  <%- @question.errors.full_messages.each do |msg| %>
+     <li><%= msg %></li>
+  <% end %>
+  <ul>
+    <li><%= f.text_field :title, {:placeholder => 'Please add a title...'} %></li>
+    <li><%= f.text_area :body, {:placeholder => 'Please add your question...'} %></li>
+    <li><%= f.text_field :user_name, {:placeholder => 'Please add your name...'} %><li>
+    <li><%= f.submit %></li>
+  </ul>
+<% end %>
+<%= link_to "Back", questions_path, :class => "button" %>
 ```
 
 you should now see the error messages, Now try filling in the form and submitting.
@@ -269,9 +306,68 @@ Now saying we need to create the show view for the questions do this by creating
 <%= link_to "Back", questions_path, :class => "button" %>
 ```
 
-Refresh and we should now be able to create questions although they are looking a little shoddy. 
+Refresh and we should now be able to create questions, but we are not finished there, as we are a friendly trusting bunch we can also add in the edit and delete funcionallity for the question.   
 
-go to `app/assets/stylesheets/application.css` and enter the following; 
+Create another view called edit.html.erb all we need on this is the same form we used on the new.html.erb. as we are using the same code in 2 places we can make it into a partial.
+
+Create a new file and call it _form.html.erb and add the following code (we used above)
+
+```erb
+<%= form_for @question do |f| %>
+  <%- @question.errors.full_messages.each do |msg| %>
+     <li><%= msg %></li>
+  <% end %>
+  <ul>
+    <li><%= f.text_field :title, {:placeholder => 'Please add a title...'} %></li>
+    <li><%= f.text_area :body, {:placeholder => 'Please add your question...'} %></li>
+    <li><%= f.text_field :user_name, {:placeholder => 'Please add your name...'} %><li>
+    <li><%= f.submit %></li>
+  </ul>
+<% end %>
+```
+
+now create the edit.html.erb file and add the following code;
+
+```erb
+<h1>Edit Question</h1>
+<%= render :partial => 'form'%>
+<%= link_to "Back", questions_path, :class => "button" %
+```
+
+and replace the form on new.html.erb with the _form.html.erb partial code should now look like below;
+
+```erb
+<h1>New Question</h1>
+<%= render :partial => 'form' %>
+
+<%= link_to "Back", questions_path, :class => "button" %>
+```
+
+now if we ever need to change the form we only need to do it in one place and we also clean up the view files, win win.
+
+The delete is short and sweet all we need is to add in a link to hit the controller method and delete the question. We may as well also add the link to edit the question at the same time, both links are added to the _question.html.erb as below;
+
+```erb
+<div class= "question-container">
+  <h2><%= link_to question.title, question_path(question) %></h2>
+  <div class="question-block">
+    <%= simple_format(question.body) %>
+    <p>
+      <small><%= question.user_name %> - <%= time_ago_in_words(question.created_at) %></small>
+    </p>
+  </div>
+ 
+  <%= link_to "Delete", question, :confirm => 'Are you sure?', :method => :delete %>
+  -
+  <%= link_to "Edit", edit_question_path(question) %>
+</div>
+```
+
+
+this now gives us full CRUD interface although it is looking a little shoddy, 
+
+Its not going to win any style awards but you can add in the pre-made css, go to `app/assets/stylesheets/application.css` and copy in the following; 
+
 
 ```css
 
