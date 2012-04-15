@@ -6,13 +6,13 @@
 * Create a new skeleton application:
  
 ```shell
-$ rails new qa_demo
+$ rails new dibi
 ```
 
 * Change your current directory to the Rails application: 
 
 ```shell
-$ cd qa_demo
+$ cd dibi
 ```
 
 * Start the server: 
@@ -326,7 +326,7 @@ now create the edit.html.erb file and add the following code;
 ```erb
 <h1>Edit Question</h1>
 <%= render :partial => 'form'%>
-<%= link_to "Back", questions_path, :class => "button" %
+<%= link_to "Back", questions_path, :class => "button" %>
 ```
 
 and replace the form on new.html.erb with the _form.html.erb partial, the view should now look like below;
@@ -338,7 +338,7 @@ and replace the form on new.html.erb with the _form.html.erb partial, the view s
 <%= link_to "Back", questions_path, :class => "button" %>
 ```
 
-now if we ever need to change the form we only need to do it in one place and we also clean up the view files, win win.
+Now if we ever need to change the form we only need to do it in one place and we also clean up the view files, win win.
 
 To add the delete is short and sweet, all we need is to add in a link to hit the controller method and delete the question. We may as well also add the link to edit the question at the same time, both links are added to the _question.html.erb as below;
 
@@ -359,7 +359,7 @@ To add the delete is short and sweet, all we need is to add in a link to hit the
 ```
 
 
-this now gives us full CRUD interface although it is looking a little shoddy, 
+This now gives us full CRUD interface although it is looking a little shoddy, 
 
 Its not going to win any style awards but you can add in the pre-made css, go to `app/assets/stylesheets/application.css` and copy in the following; 
 
@@ -510,6 +510,8 @@ Thats better, but what are questions without Answers, as with questions lets run
 ```
 
 you will see odd addition that wasnt in the Question migration,  t.references :question adds in the referance to question. 
+
+Remember to Run the migration task
  
 ## Models, Relationships and ORM 
 
@@ -532,7 +534,7 @@ While we are in the Answers model we may as well add the validation code as befo
 ```
 ## Controllers and Routes
 
-Now we have the models in place, we need to run the code to generate a controller. Direct to the answer controller and add the create method to add the following code;
+Now we have the models in place, we need to run the code to generate a controller. Then direct to the answer controller and add the create method to add the following code;
 
 ```ruby
 class AnswersController < ApplicationController
@@ -591,6 +593,46 @@ _answer.html.erb
     <small><%= answer.user_name %> - <%= time_ago_in_words(answer.created_at) %></small>
   </p>
 </div>
+```
+
+All we need to do now is include the above in the questions show page, this is shown below ;
+
+```erb
+<h3>Add your response...</h3>
+
+<%= render :partial => "answers/form", :locals => { :question => @question} %>
+
+<div class="answers-container">
+  <h2>Answers</h2>
+  <%= render :partial => 'answers/answer', :collection => @question.answers %>
+</div>
+```
+
+questions/show.html.erb should now be as below;
+
+```erb
+
+<div class="question-container">
+  <h1><%= @question.title %></h1>
+  <div class="question-block">
+    <%= simple_format(@question.body) %>
+    <p>
+      <small><%= @question.user_name %> - <%= time_ago_in_words(@question.created_at) %></small>
+    </p>
+  </div>
+</div>
+
+<h3>Add your response...</h3>
+
+<%= render :partial => "answers/form", :locals => { :question => @question} %>
+
+<div class="answers-container">
+  <h2>Answers</h2>
+  <%= render :partial => 'answers/answer', :collection => @question.answers %>
+</div>
+
+<%= link_to "Back", questions_path, :class => "button" %>
+
 ```
 Go back to http://localhost:3000/.. Success, you are the proud owner of a basic rails application. Oh wait thats not the application, thats the default hello Rails page, we need to specify a root this is done as below; 
 
