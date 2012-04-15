@@ -501,7 +501,19 @@ _answer.html.erb
   </p>
 </div>
 ```
-Go back to http://localhost:3000/.. Success, you are the proud owner of a basic rails application.
+Go back to http://localhost:3000/.. Success, you are the proud owner of a basic rails application. Oh wait thats not the application, thats the default hello Rails page, we need to specify a root this is done as below; 
+
+Open up the routes.rb
+
+```erb
+  # You can have the root of your site routed with "root"
+  # just remember to delete public/index.html.
+  root :to => 'questions#index'
+```
+
+Then, as it says in the comments goto the public/ folder and delete index.html.
+
+Now, Go back to http://localhost:3000/.. Success !
 
 If we have time we will all go over Gems if not please feel free to visit [link]. 
 
