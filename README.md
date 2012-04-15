@@ -38,7 +38,7 @@ This creates the following files:
 * `/test/unit/question_test.rb` A file for unit testing `Question` in this file
 * `/test/fixtures/question.yml` A fixtures file to assist with unit testing
 
-Let’s have a look at the questions Migration, go to `db/migrate/<time_stamp>_create_questions.rb` and you’ll notice what the generator has done for us:
+Let’s have a look at the questions Migration, start you editer / IDE and go to `db/migrate/<time_stamp>_create_questions.rb` and you’ll notice what the generator has done for us:
 
 ```ruby
 def change
@@ -72,6 +72,7 @@ Try out the following
 >> q.body = "Has it got anything to do with Ruby?"
 >> q.save
 >> Question.all
+>> exit # Exits the console 
 ```
 
 shout up if you have any errors or questions.
@@ -142,7 +143,6 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
-    @answer = Answer.new
     respond_with(@questions)
   end
   
@@ -172,13 +172,11 @@ class QuestionsController < ApplicationController
   def destroy  
     @question = Question.find(params[:id])  
     @question.destroy  
-    flash[:notice] = "Successfully destroyed product."  
+    flash[:notice] = "Successfully destroyed question."  
     respond_with(@question)  
   end
 end
 ```
-
-We will review the above code together once everyone has it in place.
 
 Once we are all happy we can move onto the views.
 
@@ -195,9 +193,8 @@ You may notice the Rails asset_tags and helpers e.g.,
 <%= yield %>
 ```
 
-Open up [link] and we will now expand on these a little.
-
 This is not a frontend workshop but to make it a little easier on the eye we will provide a basic stylesheet. For now the only change we need to make to the file is to add a `div` with a CSS `class` of `container`.
+
 ```erb
  <div class="container">
     <%= yield %>
@@ -215,8 +212,6 @@ Go to app/views/questions/ add a new file called `index.html.erb`, open the file
 <%= link_to "Add a Question", new_question_path, :class => "button" %>
 <%= render @questions %>
 ```
-
-a little strange right ? do a search to find a little more information about the link_to rails helper [link]
 
 now visit http://localhost:3000/questions
 
@@ -290,7 +285,7 @@ you should now see the error messages, Now try filling in the form and submittin
 
 ### what ?! another error.
 
-Now saying we need to create the show view for the questions do this by creating a show.html.erb page and entering the following: 
+Read the error massage and try and figure out what the issue is, shout up if you get stuck
 
 ```erb
 <div class="question-container">
@@ -334,7 +329,7 @@ now create the edit.html.erb file and add the following code;
 <%= link_to "Back", questions_path, :class => "button" %
 ```
 
-and replace the form on new.html.erb with the _form.html.erb partial code should now look like below;
+and replace the form on new.html.erb with the _form.html.erb partial, the view should now look like below;
 
 ```erb
 <h1>New Question</h1>
@@ -345,7 +340,7 @@ and replace the form on new.html.erb with the _form.html.erb partial code should
 
 now if we ever need to change the form we only need to do it in one place and we also clean up the view files, win win.
 
-The delete is short and sweet all we need is to add in a link to hit the controller method and delete the question. We may as well also add the link to edit the question at the same time, both links are added to the _question.html.erb as below;
+To add the delete is short and sweet, all we need is to add in a link to hit the controller method and delete the question. We may as well also add the link to edit the question at the same time, both links are added to the _question.html.erb as below;
 
 ```erb
 <div class= "question-container">
