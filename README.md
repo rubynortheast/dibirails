@@ -23,6 +23,8 @@ $ rails server
 
 * open up your browser of choice and browse to: http://localhost:3000.
 
+Before we start the next section, We will give you a brief overview of Models and Migrations.
+
 ## QUESTION MODEL AND MIGRATION
 
 Run the generator to create a model:
@@ -88,6 +90,8 @@ end
 Why dont you take a look at [Rails Validations](http://guides.rubyonrails.org/active_record_validations_callbacks.html) to see the other options available. 
 
 Now we know we have a working database it’s time to set up the web interface.
+
+Before we start the next section, We will give you a brief overview of Controllers and Routes.
 
 ## Controllers and Routes
 
@@ -178,7 +182,8 @@ class QuestionsController < ApplicationController
 end
 ```
 
-Once we are all happy we can move onto the views.
+
+Before we start the next section, We will give you a brief overview of Layouts, Views, Partials (& The Asset Pipeline).
 
 # Layouts, Views, Partials (& The Asset Pipeline)
 
@@ -648,7 +653,7 @@ Then, as it says in the comments goto the public/ folder and delete index.html.
 
 Now, Go back to http://localhost:3000/.. Success !
 
-If we have time we will all go over Gems if not please feel free to visit [link]. 
+If we have time we will all go over Gems if not please feel free to visit [https://www.ruby-toolbox.com/]. 
 
 
 
