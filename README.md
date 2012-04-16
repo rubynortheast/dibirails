@@ -244,7 +244,7 @@ Now re-visit http://localhost:3000/questions and click on the "Add new question"
 
 ### Exceptions and Error Messages
 
-Oops, We now need to add the view for the New question page, Create a new file called new.html.erb and enter the code below:
+Oops, We now need to add the view for the New question page, Create a new file called `new.html.erb` and enter the code below:
 
 ```erb
 <h1>New Question</h1>
@@ -261,14 +261,14 @@ Oops, We now need to add the view for the New question page, Create a new file c
 
 take a little look at [http://api.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html] to find out more about the Rails Form Helpers.
 
-Refresh the page and click submit on the form, nothing happens; this is because we put validation in the model, add the following code to the new.html.erb within the form and re-submit.
+Refresh the page and click submit on the form, nothing happens; this is because we put validation in the model, add the following code to the `new.html.erb` within the form and re-submit.
 
 ```ruby
  <%- @question.errors.full_messages.each do |msg| %>
      <li><%= msg %></li>
   <% end %>
 ```
- new.html.erb should now look something like this;
+ `new.html.erb` should now look something like this;
  
 ```erb
 <h1>New Question</h1>
@@ -308,9 +308,9 @@ Read the error massage and try and figure out what the issue is, shout up if you
 
 Refresh and we should now be able to create questions, but we are not finished there, as we are a friendly trusting bunch we can also add in the edit and delete funcionallity for the question.   
 
-Create another view called edit.html.erb all we need on this is the same form we used on the new.html.erb. as we are using the same code in 2 places we can make it into a partial.
+Create another view called `edit.html.erb` all we need on this is the same form we used on the `new.html.erb`. as we are using the same code in 2 places we can make it into a partial.
 
-Create a new file and call it _form.html.erb and add the following code (we used above)
+Create a new file and call it `_form.html.erb` and add the following code (we used above)
 
 ```erb
 <%= form_for @question do |f| %>
@@ -326,7 +326,7 @@ Create a new file and call it _form.html.erb and add the following code (we used
 <% end %>
 ```
 
-now create the edit.html.erb file and add the following code;
+now create the `edit.html.erb` file and add the following code;
 
 ```erb
 <h1>Edit Question</h1>
@@ -334,7 +334,7 @@ now create the edit.html.erb file and add the following code;
 <%= link_to "Back", questions_path, :class => "button" %>
 ```
 
-and replace the form on new.html.erb with the _form.html.erb partial, the view should now look like below;
+and replace the form on `new.html.erb` with the `_form.html.erb` partial, the view should now look like below;
 
 ```erb
 <h1>New Question</h1>
@@ -345,7 +345,7 @@ and replace the form on new.html.erb with the _form.html.erb partial, the view s
 
 Now if we ever need to change the form we only need to do it in one place and we also clean up the view files, win win.
 
-To add the delete is short and sweet, all we need is to add in a link to hit the controller method and delete the question. We may as well also add the link to edit the question at the same time, both links are added to the _question.html.erb as below;
+To add the delete is short and sweet, all we need is to add in a link to hit the controller method and delete the question. We may as well also add the link to edit the question at the same time, both links are added to the `_question.html.erb` as below;
 
 ```erb
 <div class= "question-container">
@@ -514,22 +514,30 @@ Thats better, but what are questions without Answers, as with questions lets run
   end
 ```
 
-you will see odd addition that wasnt in the Question migration,  t.references :question adds in the referance to question. 
+you will see odd addition that wasn't in the Question migration,  `t.references :question` adds in the referance to question. This automatically creates a foreign id field in the database called `question_id`.
 
-Remember to Run the migration task
+Remember to Run the migration task with
+
+```shell
+$ rake db:migrate
+```
  
 ## Models, Relationships and ORM 
 
 Now open up the Question model, and add: 
 
 ```ruby
-has_many :answers
+class Question < ActiveRecord::Base
+  has_many :answers
+end
 ```
 
 now open the Answer model and add: 
 
 ```ruby
-belongs_to :question
+class Answer < ActiveRecord::Base
+  belongs_to :question
+end
 ```
 
 While we are in the Answers model we may as well add the validation code as before: 
@@ -573,9 +581,9 @@ We need to add a nested resource to the routes so that we can Add answers to que
 
 We now need to add two partials one form to submit the answers and another partial to display the answer..
 
-add two files to the views/answers/ folder; 
+add two files to the `app/views/answers/` folder; 
 
-_form.html.erb
+`_form.html.erb`
 
 ```erb
 <p class="flash"><%= flash[:notice] %></p>
@@ -589,7 +597,7 @@ _form.html.erb
 <% end %>
 ```
 
-_answer.html.erb
+`_answer.html.erb`
 
 ```erb
 <div class="answers-block">
@@ -600,7 +608,7 @@ _answer.html.erb
 </div>
 ```
 
-All we need to do now is include the above in the questions show page, this is shown below ;
+All we need to do now is include the above in the questions show page, this is shown below:
 
 ```erb
 <h3>Add your response...</h3>
